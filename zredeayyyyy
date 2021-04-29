@@ -1,0 +1,66 @@
+<body>
+  <div id="bulb">
+    <img src="https://bit.ly/37YD8eQ" alt="bulboff" id="bulboff">
+    <img src="https://bit.ly/37WXHIB" alt="bulbon" id="bulbon">
+  </div>
+  <marquee behavior="" direction="right">
+  <img id="zombie" src="https://bit.ly/3jR8ir6" alt="">
+    </marquee>
+  
+</body>
+
+
+
+html
+
+
+
+
+body{
+  background-color:black;
+}
+
+#bulbon{
+  display:none;
+}
+
+#zombie{
+  visibility:hidden;
+}
+
+
+
+css
+
+
+
+
+
+const bulb =document.getElementById("bulb");
+const bulbon =document.getElementById("bulbon");
+const bulboff =document.getElementById("bulboff");
+const zombie =document.getElementById("zombie");
+const body=document.querySelector("body");
+var status="bulboff";
+
+bulb.onclick=()=>{
+  if(status==="bulboff"){
+    body.style.background="white";
+    bulbon.style.display="block";
+    bulboff.style.display="none";
+    zombie.style.visibility="visible";
+    status="bulbon"
+  }else{
+    body.style.background="black";
+    bulbon.style.display="none";
+    bulboff.style.display="block";
+    zombie.style.visibility="hidden";
+    status="bulboff"
+    
+  }
+}
+
+
+
+
+js
