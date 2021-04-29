@@ -1,0 +1,610 @@
+<main id="main">
+  <canvas id="can"></canvas>
+  <div
+    class="icon-tools"
+    onclick="main.classList.add('overlay-tools');"
+    onmouseover="buttonHover = true"
+    onmouseleave="buttonHover = false"
+  ></div>
+  <div class="tools overlay">
+    <div class="icon-back" onclick="main.classList.remove('overlay-tools')"></div>
+    <div class="size" onclick="main.classList.add('overlay-size')"></div>
+    <div class="colors" onclick="main.classList.add('overlay-colors')">
+      <span></span><span></span><span></span><span></span>
+    </div>
+    <div class="save" onclick="saveImage()"></div>
+    <div class="clear" onclick="clearImage()"></div>
+  </div>
+  <div class="colors overlay" id="pallette">
+    <div class="icon-back" onclick="main.classList.remove('overlay-colors')"></div>
+  </div>
+  <div class="size overlay" id="sizer">
+    <div class="icon-back" onclick="main.classList.remove('overlay-size')"></div>
+  </div>
+  <canvas id="cursorCan"></canvas>
+</main>
+<aside id="aside"></aside>
+
+
+
+
+html
+
+
+
+
+body {
+  background-color: #d4f5f1;
+}
+
+main {
+  position: fixed;
+  left: calc(50% - 50px);
+  top: calc(50% - 25px);
+  width: 100px;
+  height: 50px;
+  overflow: hidden;
+  cursor: none;
+  background-color: white;
+}
+
+aside {
+  position: fixed;
+  left: 5px;
+  right: 5px;
+  top: calc(50% + 45px);
+  bottom: 5px;
+  text-align: center;
+  
+  &>div {
+    position: relative;
+    display: inline-block;
+    width: 100px;
+    height: 50px;
+    margin: 5px;
+    transition: opacity 1s;
+    
+    &.hide {
+      opacity: 0;
+    }
+    
+    button {
+      position: absolute;
+      border: 0;
+      width: 30px;
+      height: 30px;
+      top: 10px;
+      background-color: #0000;
+      transition: transform 0.4s;
+      z-index: 10;
+      opacity: 0;
+      cursor: pointer;
+      outline: none;
+      
+      &.copy {
+        left: 3px;
+        
+        &:before, &:after {
+          content: '';
+          position: absolute;
+          width: 10px;
+          height: 15px;
+          background-color: #fff;
+          border: 1px solid #000;
+        }
+        &:before {
+          top: 3px;
+          right: 4px;
+        }
+        &:after {
+          top: 10px;
+          left: 6px;
+        }
+      }
+      
+      &.download {
+        left: 35px;
+        
+        &:before, &:after {
+          content: '';
+          position: absolute;
+        }
+        &:before {
+          width: 3px;
+          height: 20px;
+          top: 5px;
+          left: 13px;
+          background-color: #fff;
+        }
+        &:after {
+          top: 10px;
+          left: 8px;
+          width: 12px;
+          height: 12px;
+          border: solid #fff;
+          border-width: 0 2px 2px 0;
+          transform: rotate(45deg);
+        }
+      }
+      
+      &.delete {
+        left: 68px;
+        
+        &:before, &:after {
+          content: '';
+          position: absolute;
+          top: 7px;
+          left: 13px;
+          width: 2px;
+          height: 18px;
+          background-color: #fff;
+          transform: rotate(45deg);
+        }
+        &:after {
+          transform: rotate(-45deg);
+        }
+      }
+      
+      &:hover {
+        transform: scale(1.2);
+      }
+    }
+    
+    &:after {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      background-color: #000;
+      opacity: 0;
+      transition: opacity 0.4s;
+    }
+    
+    &:hover:after {
+      opacity: 0.6;
+    }
+    &:hover button {
+      opacity: 1;
+    }
+  }
+}
+
+main, aside>div {
+  box-shadow: 0 2px 5px 0 #0006;
+}
+
+canvas,
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.overlay {
+  background-color: white;
+  left: -120px;
+  transition: left 0.4s;
+  border: 1px solid #ccc;
+}
+
+main.overlay-tools > .tools.overlay,
+main.overlay-size > .size.overlay,
+main.overlay-colors > .colors.overlay,
+main.overlay-shape > .shape.overlay {
+  left: 0;
+}
+
+
+#cursorCan {
+  pointer-events: none;
+  z-index: 100;
+}
+
+[class^="icon-"] {
+  position: relative;
+  
+  &:after {
+    content: '';
+    position: absolute;
+  }
+}
+
+.icon-back {
+  margin-right: -4px;
+  
+  &:after {
+    top: 3px;
+    left: -6px;
+    border: solid transparent;
+    border-width: 5px 8px;
+    border-right-color: black;
+    opacity: 0.4;
+    transition: opacity 0.4s;
+  }
+  
+  &:hover:after {
+    opacity: 1;
+  }
+}
+
+.icon-tools {
+  display: inline-block;
+  height: 10px;
+  width: 1px;
+  top: -2px;
+  left: 3px;
+  
+  &:after {
+    border: solid transparent;
+    border-width: 5px 8px;
+    border-left-color: #000;
+    transition:
+      transform 0.4s,
+      opacity 0.4s;
+    opacity: 0.4;
+  }
+  
+  &:hover:after {
+    transform: scale(1.1);
+    opacity: 1;
+  }
+  
+  &:before {
+    content: '';
+    position: absolute;
+    top: -1px;
+    left: -1px;
+    border: solid transparent;
+    border-width: 6px 10px;
+    border-left-color: #fff;
+    transition:
+      transform 0.4s,
+      opacity 0.4s;
+    opacity: 0.4;
+  }
+  
+  &:hover:before {
+    transform: scale(1.1);
+    opacity: 1;
+  }
+}
+
+.tools.overlay div {
+  &:not(:first-child) {
+    display: inline-block;
+  }
+  width: 19px;
+  height: 20px;
+  transition: transform 0.4s;
+  
+  &:hover {
+    transform: scale(1.2);
+  }
+  
+  &.size {
+    position: relative;
+    
+    &:after, &:before {
+      content: '';
+      position: absolute;
+      background-color: #000;
+      border: 1px solid #fff;
+      border-radius: 100%;
+    }
+    &:before {
+      padding: 8px;
+      top: 2px;
+      left: 5px;
+    }
+    &:after {
+      padding: 4px;
+      top: 10px;
+      left: 3px;
+    }
+  }
+  
+  &.colors {
+    padding-left: 4px;
+    
+    span {
+      display: inline-block;
+      width: 7px;
+      height: 7px;
+      border-radius: 100%;
+      border: 1px solid #fff;
+
+      &:nth-child(1) {
+        border-color: #ccc;
+      }
+      &:nth-child(2) {
+        background-color: black;
+      }
+      &:nth-child(3) {
+        background-color: lightgray;
+      }
+      &:nth-child(4) {
+        background-color: gray;
+      }
+    }
+  }
+  
+  &.save {
+    position: relative;
+    
+    &:after {
+      content: '';
+      position: absolute;
+      left: 5px;
+      width: 6px;
+      height: 16px;
+      border: solid #000;
+      border-width: 0px 2px 2px 0px;
+      transform: rotate(45deg);
+    }
+  }
+  
+  &.clear {
+    position: relative;
+    
+    &:before, &:after {
+      content: '';
+      position: absolute;
+      top: 2px;
+      left: 9px;
+      width: 2px;
+      height: 18px;
+      background-color: #000;
+      transform: rotate(45deg);
+    }
+    &:after {
+      transform: rotate(-45deg);
+    }
+  }
+}
+
+.colors {
+  line-height: 0;
+  padding: 1px 5px;
+  z-index: 0;
+
+  div {
+    display: inline-block;
+    width: 13px;
+    height: 13px;
+    margin-left: 2px;
+    border-radius: 100%;
+    border: 1px solid white;
+    
+    &:nth-child(2),
+    &:nth-child(13) {
+      border-color: #ddd;
+    }
+    
+    &:not(:nth-child(1)):hover {
+      transform: scale(1.3, 1.3);
+      transform-origin: 5px 5px;
+      z-index: 10;
+    }
+  }
+}
+
+.size.overlay {
+  vertical-align: middle;
+  
+  &>div:not(:first-child) {
+    position: relative;
+    display: inline-block;
+    width: 19px;
+    height: 22px;
+    margin-top: 16px;
+    text-align: center;
+    border-radius: 100%;
+    line-height: 22px;
+    
+    &>div {
+      display: inline-block;
+      border-radius: 100%;
+      background-color: #777;
+      transition: background-color 0.4s;
+    }
+    
+    &:after {
+      content: '';
+      position: absolute;
+      bottom: -3px;
+      left: 5px;
+      border: 4px solid transparent;
+      transition: border-bottom-color 0.4s;
+    }
+    
+    &:last-child:after {
+      bottom: -8px;
+    }
+    
+    &:hover {
+      &>div {
+        background-color: #000;
+      }
+      
+      &:after {
+        border-bottom-color: #000;
+      }
+    }
+  }
+}
+
+
+
+scss
+
+
+
+
+let can = document.getElementById('can'),
+    ctx = can.getContext('2d'),
+    curCan = document.getElementById('cursorCan'),
+    curCtx = curCan.getContext('2d'),
+    main = document.getElementById('main'),
+    aside = document.getElementById('aside'),
+    pallette = document.getElementById('pallette'),
+    sizer = document.getElementById('sizer'),
+    buttonHover = false;
+can.width = 100;
+can.height = 50;
+ctx.translate(0.5, 0.5);
+curCan.width = 100;
+curCan.height = 50;
+ctx.translate(0.5, 0.5);
+curCtx.fillStyle = '#fff';
+ctx.lineWidth = 3;
+ctx.lineCap = 'round';
+ctx.fillStyle = '#fff';
+ctx.fillRect(-1, -1, 101, 51);
+
+// Mouse listener
+let mouse = {
+  active: false,
+  x: 0,
+  y: 0,
+  prevX: 0,
+  prevY: 0,
+  press : false,
+  down: false,
+  up: false
+};
+main.onmousemove = e => {
+  mouse.x = e.clientX - main.offsetLeft;
+  mouse.y = e.clientY - main.offsetTop;
+};
+main.onmousedown = e => {
+  mouse.down = true;
+  if (!buttonHover) {
+    mouse.press = true;
+  }
+  mouse.prevX = mouse.x;
+  mouse.prevY = mouse.y;
+  mouse.x = e.clientX - main.offsetLeft;
+  mouse.y = e.clientY - main.offsetTop;
+};
+main.onmouseup = e => {
+  mouse.up = true;
+  mouse.press = false;
+};
+main.onmouseleave = e => {
+  mouse.up = true;
+  mouse.press = false;
+  mouse.active = false;
+};
+main.onmouseenter = e => {
+  mouse.active = true;
+};
+
+[
+ 'white', 'lightgray', 'gray', 'black',
+ 'pink', 'purple', 'yellow', 'lightgreen', 'lightblue',
+ 'red', 'brown', 'orange', 'green', 'blue'
+].forEach(c => {
+  let col = document.createElement('div');
+  col.style.background = c;
+  col.onclick = () => {
+    ctx.strokeStyle = c;
+    main.classList.remove('overlay-colors', 'overlay-tools');
+  };
+  pallette.appendChild(col);
+});
+
+[1, 3, 8, 13, 20].forEach(s => {
+  let size = document.createElement('div'),
+      icon = document.createElement('div');
+  icon.style.width = s + 'px';
+  icon.style.height = s + 'px';
+  size.onclick = () => {
+    ctx.lineWidth = s;
+    main.classList.remove('overlay-size', 'overlay-tools');
+  };
+  sizer.appendChild(size);
+  size.appendChild(icon);
+});
+
+
+function step() {
+  if (mouse.press && !main.classList.contains('overlay-tools')) {
+    ctx.beginPath();
+      ctx.moveTo(mouse.prevX, mouse.prevY);
+      ctx.lineTo(mouse.x, mouse.y);
+    ctx.stroke();
+    mouse.prevX = mouse.x;
+    mouse.prevY = mouse.y;
+  }
+  
+  drawCursor();
+  mouse.up = false;
+  mouse.down = false;
+  window.requestAnimationFrame(step);
+}
+
+function drawCursor() {
+  curCtx.clearRect(-1, -1, 101, 51);
+  if (mouse.active) {
+    curCtx.beginPath();
+      curCtx.moveTo(mouse.x, mouse.y);
+      curCtx.lineTo(mouse.x + 3, mouse.y);
+      curCtx.lineTo(mouse.x + 9, mouse.y + 6);
+      curCtx.lineTo(mouse.x + 6, mouse.y + 9);
+      curCtx.lineTo(mouse.x, mouse.y + 3);
+    curCtx.closePath();
+    curCtx.fill();
+    curCtx.stroke();
+  }
+}
+step();
+
+function clearImage() {
+  ctx.fillRect(-1, -1, 101, 51);
+  main.classList.remove('overlay-tools');
+}
+
+function saveImage() {
+  let imgContain = document.createElement('div');
+  let img = document.createElement('img');
+  let imgUrl = can.toDataURL("image/png").replace("image/png", "image/octet-stream");
+  img.src = imgUrl
+  img.classList.add('hide');
+  imgContain.appendChild(img);
+  
+  let btnDel = document.createElement('button');
+  btnDel.classList.add('delete');
+  btnDel.onclick = () => aside.removeChild(imgContain);
+  imgContain.appendChild(btnDel);
+  
+  let btnCopy = document.createElement('button');
+  btnCopy.classList.add('copy');
+  btnCopy.onclick = () => {
+    ctx.drawImage(img, -0.5, -0.5);
+    main.classList.remove('overlay-tools');
+  }
+  imgContain.appendChild(btnCopy);
+  
+  let btnDown = document.createElement('button');
+  btnDown.classList.add('download');
+  btnDown.onclick = () => window.location.href = imgUrl;
+  imgContain.appendChild(btnDown);
+  
+  aside.appendChild(imgContain);
+  setTimeout(() => img.classList.remove('hide'), 100);
+  clearImage();
+}
+
+function pickColor(col) {
+  ctx.strokeStyle = col;
+  main.classList.remove('overlay-colors', 'overlay-tools')
+}
+
+
+
+
+js
