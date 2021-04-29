@@ -1,0 +1,47 @@
+<nav>
+  <li>Home</li>
+  <li>About</li>
+  <li id="more">more</li>
+</nav>
+<div id="extra">
+  <li>cricket</li>
+  <li>Football</li>
+  <li>Baseball</li>
+  <li>Batminton</li>
+  <li>vollyball</li>
+</div>
+
+
+
+html
+
+
+
+nav{
+  display:flex;
+  justify-content:space-evenly;
+  background-color:skyblue;
+}
+#extra{
+  display:none;
+}
+
+
+
+
+css
+
+
+
+
+const more =document.getElementById("more");
+const extra =document.getElementById("extra");
+
+more.onclick=()=>{
+  extra.style.display="block";
+}
+
+
+
+
+js
