@@ -1,0 +1,358 @@
+<div id="editor">
+    <button @click="lang = (lang === 'html' ? 'css' : 'html')">
+      {{ lang === 'html' ? 'HTML' : 'CSS' }}
+    </button>
+    <button @click="toggleTheme()">
+      {{ theme === 'dark' ? 'LIGHTER' : 'DARKER' }}
+    </button>
+    <code :class="'lang-' + lang">
+        <textarea
+            ref         ="textarea"
+            v-model     ="output"
+            @input      ="updateMirror"
+            @select     ="updateMirror"
+            @mousedown  ="drag = true"
+            @mouseup    ="drag = false"
+            @mousemove  ="drag ? updateMirror() : ''"
+            @click      ="updateCaret"
+            @keyup      ="checkKey(true, $event.keyCode)"
+            @keydown    ="checkKey(false, $event.keyCode)"
+            @focus      ="
+                focused = true;
+                $emit('focus')
+            "
+            @blur       ="
+                focused = false;
+                $emit('blur')
+            "
+        ></textarea>
+        <div
+            class   ="selectionMirror"
+            v-html  ="selectionMirror"
+        ></div>
+        <div class="textMirror">
+            <div v-html="styledText"></div>
+            <div
+                class   ="caret"
+                :class  ="{
+                    focus : focused,
+                    blink : caretBlink
+                }"
+                :style  ="{
+                    left    : caretX + 'px',
+                    top     : caretY + 'px'
+                }"
+            ></div>
+        </div>
+    </code>
+</div>
+
+
+
+
+
+html
+
+
+
+
+
+#editor {
+  --c-dark-bg-0 : #192227;
+  --c-dark-bg-1 : #263238;
+  --c-dark-bg-2 : #5c6c70;
+  --c-dark-text : #ffffff;
+  --c-dark-hl-0 : #89ddff;
+  --c-dark-hl-1 : #f07178;
+  --c-dark-hl-2 : #ffcb6b;
+  --c-dark-hl-3 : #b2ccd6;
+  --c-dark-hl-4 : #f78c6c;
+  --c-dark-hl-5 : #82aaff;
+
+  --c-light-bg-0 : #e8e8e8;
+  --c-light-bg-1 : #f0f0f0;
+  --c-light-bg-2 : #dcefed;
+  --c-light-text : #475685;
+  --c-light-hl-0 : #0080b3;
+  --c-light-hl-1 : #ec464f;
+  --c-light-hl-2 : #ffa600;
+  --c-light-hl-3 : #8796b0;
+  --c-light-hl-4 : #f78c6c;
+  --c-light-hl-5 : #82aaff;
+
+  --c-bg-0 : var(--c-dark-bg-0);
+  --c-bg-1 : var(--c-dark-bg-1);
+  --c-bg-2 : var(--c-dark-bg-2);
+  --c-text : var(--c-dark-text);
+  --c-hl-0 : var(--c-dark-hl-0);
+  --c-hl-1 : var(--c-dark-hl-1);
+  --c-hl-2 : var(--c-dark-hl-2);
+  --c-hl-3 : var(--c-dark-hl-3);
+  --c-hl-4 : var(--c-dark-hl-4);
+  --c-hl-5 : var(--c-dark-hl-5);
+  
+  --font : Consolas, "Courier New", monospace;
+}
+
+#editor button {
+  background-color: var(--c-bg-1);
+  border: 1px solid var(--c-bg-0);
+  border-radius: 6px;
+  padding: 4px;
+  width: 80px;
+  margin: 0 6px 6px 0;
+  font-size: 11px;
+  color: var(--c-text);
+  
+  &:hover {
+    cursor: pointer;
+    background-color: var(--c-bg-0);
+  }
+}
+
+code {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    min-height: 200px;
+    border: 1px solid var(--c-bg-0);
+    border-radius: 5px;
+    font-size: 13px;
+    background-color: var(--c-bg-1);
+
+    textarea, 
+    .textMirror, 
+    .selectionMirror {
+        position: absolute;
+        left: 10px;
+        top: 10px;
+        width: calc(100% - 20px);
+        height: calc(100% - 20px);
+        border: none;
+        overflow: auto;
+        font-family: var(--font);
+        font-size: 13px;
+        line-height: 16px;
+        white-space: pre;
+    }
+
+    textarea {
+        padding: 0;
+        border: 0;
+        z-index: 10;
+        opacity: 0;
+    }
+
+    .textMirror {
+        z-index: 5;
+        color: var(--c-text);
+        background-color: transparent;
+      
+        em {
+          font-style : normal;
+        }
+      
+        @for $i from 0 through 5 {
+            [hl-#{$i}] {
+                color: var(--c-hl-#{$i});
+            }
+        }
+      
+        @keyframes blink {
+            0%   { opacity: 1 }
+            30%  { opacity: 1 }
+            60%  { opacity: 0 }
+            100% { opacity: 1 }
+        }
+
+        .caret {
+            position: absolute;
+            width: 2px;
+            height: 13px;
+            background-color: var(--c-text);
+            opacity: 0;
+            transition: opacity 0.1s;
+
+            &.focus {
+                opacity: 1;
+                
+                &.blink {
+                    animation: blink 1s infinite;
+                }
+            }
+        }
+    }
+
+    .selectionMirror {
+        z-index: 4;
+        color: transparent;
+        pointer-events: none;
+      
+        [hl-sel] {
+            background-color: var(--c-bg-2);
+            border-radius: 4px;
+      }
+    }
+  
+    &.type-css [hl-5],
+    &.type-html [hl-2] {
+        font-style: italic;
+    }
+}
+
+
+
+
+scss
+
+
+
+let sampleCode = `body {
+  font-size: 20px;
+  width: calc(100% - 5em);
+  @mixin commonTemplate;
+}
+`;
+
+new Vue({
+		el: '#editor',
+    data : {
+        output      : sampleCode,
+        lang        : 'css',
+        area        : null,
+        styledText  : '',
+        caretX      : 0,
+        caretY      : 0,
+        caretBlink  : true,
+        focused     : false,
+        drag        : false,
+        theme       : 'dark',
+        selectionMirror : '',
+        arrowKeyCheck   : 0,
+        htmlStyles  : [
+            new RegExp(/(=|"|<|>|\/)/g),
+            new RegExp(/<\/?([^ >]+)/g),
+            new RegExp(/<[^ ]+ ([a-z0-9_-]+)/g),
+            new RegExp(/"([^"]+)"/g)
+        ]
+    },
+    mounted : function() {
+        this.textarea = this.$refs.textarea;
+        this.updateMirror();
+    },
+    methods : {
+        checkKey : function(up, key) {
+            if (key >= 37 && key <= 40) {
+                if (up) {
+                    clearInterval(this.arrowKeyCheck);
+                    this.arrowKeyCheck = 0;
+                    this.updateCaret();
+                } else if (!this.arrowKeyCheck) {
+                    this.arrowKeyCheck = setInterval(() => this.updateCaret(0), 50);
+                }
+            }
+        },
+        updateMirror : function() {
+            let pos = 0;
+            this.output = this.output
+                .replace(
+                    /({|;)\n([^ }])/g,
+                    (m, p1, p2) => {
+                        pos += 2;
+                        return p1 + '\n  ' + p2;
+                    }
+                );
+            setTimeout(() => {
+                this.textarea.selectionStart += pos;
+                this.textarea.selectionEnd += pos;
+            });
+
+            if (this.lang === 'css') {
+                this.styledText = this.output
+                    .replace(/(calc|through|from|return)/gi, '<em hl-5>$1</em>')
+                    .replace(/(\.[^{,]+)({|,)/g, '<em hl-2>$1</em>$2')
+                    .replace(/(^|})([^{:]+){/g, '$1<em hl-1>$2</em>{')
+                    .replace(/:([^,{;]+)(,|{)/g, ':<em hl-5>$1</em>$2')
+                    .replace(/(^|{|;)([^:;{]+):/g, '$1<em hl-3>$2</em>:')
+                    .replace(/:([^;:{]+);/g, ':<em hl-4>$1</em>;')
+                    .replace(/((@|\$)[^ \n]*)/g, '<em hl-5>$1</em>')
+                    .replace(/(&|:|\{|\}|,|;|\[|\]|#|\(|\))/g, '<em hl-0>$1</em>');
+            } else if (this.lang === 'html') {
+                let styleInserts = [],
+                    result;
+                this.htmlStyles.forEach((r, i) => {
+                    while((result = r.exec(this.output)) !== null) {
+                        let index = result.index + result[0].indexOf(result[1]);
+                        styleInserts.push([i, index, index + result[1].length]);
+                    }
+                });
+                this.styledText = this.output;
+                styleInserts.sort((a, b) => b[1] - a[1]).forEach(r => {
+                    this.styledText =
+                        this.styledText.slice(0, r[1]) +
+                        '<em hl-' + r[0] + '>' +
+                        this.styledText.slice(r[1], r[2])
+                            .replace(/</g, '&lt;')
+                            .replace(/>/g, '&gt;')
+                            .replace(/\//g, '&sol;') +
+                        '</em>' +
+                        this.styledText.slice(r[2]);
+                });
+            }
+            
+            this.updateCaret();
+        },
+        updateCaret : function() {
+            this.caretBlink = false;
+            setTimeout(() => this.caretBlink = true, 2000);
+
+            if (typeof this.output !== 'undefined') {
+                let prevText = this.output.substring(0, this.textarea.selectionStart);
+                let caretRow = prevText.match(/\n/g);
+                caretRow = caretRow ? caretRow.length : 0;
+                let caretCol = prevText.length - prevText.lastIndexOf('\n') - 1;
+                let charWidth  = 7.8,
+                    lineHeight = 16;
+
+                this.caretX = caretCol * charWidth;
+                this.caretY = caretRow * lineHeight;
+
+                if (this.textarea.selectionStart !== this.textarea.selectionEnd) {
+                    this.selectionMirror =
+                        this.output.slice(0, this.textarea.selectionStart)
+                            .replace(/</g, '&lt;')
+                            .replace(/>/g, '&gt;')
+                            .replace(/\//g, '&sol;') +
+                        '<em hl-sel>' +
+                        this.output.slice(this.textarea.selectionStart, this.textarea.selectionEnd)
+                            .replace(/</g, '&lt;')
+                            .replace(/>/g, '&gt;')
+                            .replace(/\//g, '&sol;') +
+                        '</em>';
+                } else {
+                    this.selectionMirror = '';
+                }
+            }
+        },
+      toggleTheme : function() {
+          this.theme = (this.theme === 'dark' ? 'light' : 'dark');
+          let el = document.getElementById('editor');
+          [
+            'bg-0', 'bg-1', 'bg-2', 
+            'text',
+            'hl-0','hl-1', 'hl-2', 'hl-3', 'hl-4', 'hl-5'
+          ].forEach(c => {
+            el.style.setProperty(
+              '--c-' + c,
+              'var(--c-' + this.theme + '-' + c + ')'
+            );
+          });
+      }
+    }
+});
+
+
+
+
+
+js
