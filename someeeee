@@ -1,0 +1,682 @@
+<div class="o-grid p-layout">
+  <div class="o-grid__item o-grid__header">
+    <form action="" method="post">
+      <label for="search">
+        <input type="search" name="search" id="search" />
+        <button class="c-btn c-btn--yellow">Search</button>
+      </label>
+    </form>
+  </div>
+  <div class="o-grid__item o-grid__main">
+    <button class="c-btn c-btn--yellow c-btn--3d">3D button</button>
+
+    <br><br>
+
+    <dl id="accordion-group-main-light" role="presentation" class="c-accordion c-accordion--light">
+      <dt role="heading" aria-level="3">
+        <button aria-expanded="true"
+          class="c-accordion__trigger"
+          aria-controls="sect-main-light-1"
+          id="accordion-main-light-1"
+          type="button">
+          <span class="c-accordion__heading">
+            Accordion heading 1
+          </span>
+          <span class="c-arrow">
+            <i class="c-arrow__left"></i>
+            <i class="c-arrow__right"></i>
+          </span>
+        </button>
+      </dt>
+      <dd id="sect-main-light-1" role="region" aria-labelledby="accordion-main-light-1" class="c-accordion__panel">
+        <div>
+          <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Optio unde amet quasi quam ad nam ipsum, consectetur expedita, fugit assumenda sapiente eum, ut debitis cumque aut voluptatem officiis neque minima.</p>
+          <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Optio unde amet quasi quam ad nam ipsum, consectetur expedita, fugit assumenda sapiente eum, ut debitis cumque aut voluptatem officiis neque minima.</p>
+        </div>
+      </dd>
+
+      <dt role="heading" aria-level="3">
+        <button aria-expanded="false"
+          class="c-accordion__trigger"
+          aria-controls="sect-main-light-2"
+          id="accordion-main-light-2"
+          type="button">
+          <span class="c-accordion__heading">
+            Accordion heading 2
+          </span>
+          <span class="c-arrow">
+            <i class="c-arrow__left"></i>
+            <i class="c-arrow__right"></i>
+          </span>
+        </button>
+      </dt>
+      <dd id="sect-main-light-2" role="region" aria-labelledby="accordion-main-light-2" class="c-accordion__panel">
+        <div>
+          <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Optio unde amet quasi quam ad nam ipsum, consectetur expedita, fugit assumenda sapiente eum, ut debitis cumque aut voluptatem officiis neque minima.</p>
+          <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Optio unde amet quasi quam ad nam ipsum, consectetur expedita, fugit assumenda sapiente eum, ut debitis cumque aut voluptatem officiis neque minima.</p>
+        </div>
+      </dd>
+
+      <dt role="heading" aria-level="3">
+        <button aria-expanded="false"
+          class="c-accordion__trigger"
+          aria-controls="sect-main-light-3"
+          id="accordion-main-light-3"
+          type="button">
+          <span class="c-accordion__heading">
+            Accordion heading 3
+          </span>
+          <span class="c-arrow">
+            <i class="c-arrow__left"></i>
+            <i class="c-arrow__right"></i>
+          </span>
+        </button>
+      </dt>
+      <dd id="sect-main-light-3" role="region" aria-labelledby="accordion-main-light-3" class="c-accordion__panel">
+        <div>
+          <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Optio unde amet quasi quam ad nam ipsum, consectetur expedita, fugit assumenda sapiente eum, ut debitis cumque aut voluptatem officiis neque minima.</p>
+          <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Optio unde amet quasi quam ad nam ipsum, consectetur expedita, fugit assumenda sapiente eum, ut debitis cumque aut voluptatem officiis neque minima.</p>
+        </div>
+      </dd>
+    </dl>
+
+    <br><br>
+
+    <dl id="accordion-group-main-dark" role="presentation" class="c-accordion c-accordion--dark c-accordion--single">
+      <dt role="heading" aria-level="3">
+        <button aria-expanded="false"
+          class="c-accordion__trigger"
+          aria-controls="sect-main-dark-1"
+          id="accordion-main-dark-1"
+          type="button">
+          <span class="c-accordion__heading">
+            Accordion heading 1
+          </span>
+          <span class="c-arrow">
+            <i class="c-arrow__left"></i>
+            <i class="c-arrow__right"></i>
+          </span>
+        </button>
+      </dt>
+      <dd id="sect-main-dark-1" role="region" aria-labelledby="accordion-main-dark-1" class="c-accordion__panel">
+        <div>
+          <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Optio unde amet quasi quam ad nam ipsum, consectetur expedita, fugit assumenda sapiente eum, ut debitis cumque aut voluptatem officiis neque minima.</p>
+          <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Optio unde amet quasi quam ad nam ipsum, consectetur expedita, fugit assumenda sapiente eum, ut debitis cumque aut voluptatem officiis neque minima.</p>
+        </div>
+      </dd>
+
+      <dt role="heading" aria-level="3">
+        <button aria-expanded="true"
+          class="c-accordion__trigger"
+          aria-controls="sect-main-dark-2"
+          id="accordion-main-dark-2"
+          type="button">
+          <span class="c-accordion__heading">
+            Accordion heading 2
+          </span>
+          <span class="c-arrow">
+            <i class="c-arrow__left"></i>
+            <i class="c-arrow__right"></i>
+          </span>
+        </button>
+      </dt>
+      <dd id="sect-main-dark-2" role="region" aria-labelledby="accordion-main-dark-2" class="c-accordion__panel">
+        <div>
+          <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Optio unde amet quasi quam ad nam ipsum, consectetur expedita, fugit assumenda sapiente eum, ut debitis cumque aut voluptatem officiis neque minima.</p>
+          <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Optio unde amet quasi quam ad nam ipsum, consectetur expedita, fugit assumenda sapiente eum, ut debitis cumque aut voluptatem officiis neque minima.</p>
+        </div>
+      </dd>
+
+      <dt role="heading" aria-level="3">
+        <button aria-expanded="false"
+          class="c-accordion__trigger"
+          aria-controls="sect-main-dark-3"
+          id="accordion-main-dark-3"
+          type="button">
+          <span class="c-accordion__heading">
+            Accordion heading 3
+          </span>
+          <span class="c-arrow">
+            <i class="c-arrow__left"></i>
+            <i class="c-arrow__right"></i>
+          </span>
+        </button>
+      </dt>
+      <dd id="sect-main-dark-3" role="region" aria-labelledby="accordion-main-dark-3" class="c-accordion__panel">
+        <div>
+          <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Optio unde amet quasi quam ad nam ipsum, consectetur expedita, fugit assumenda sapiente eum, ut debitis cumque aut voluptatem officiis neque minima.</p>
+          <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Optio unde amet quasi quam ad nam ipsum, consectetur expedita, fugit assumenda sapiente eum, ut debitis cumque aut voluptatem officiis neque minima.</p>
+        </div>
+      </dd>
+    </dl>
+  </div>
+
+  <div class="o-grid__item o-grid__sidebar">
+    <a href="#" role="button" class="c-btn c-btn--yellow">Link button</a>
+
+    <br><br>
+
+    <dl id="accordion-group-sidebar" role="presentation" class="c-accordion p-sidebar-menu">
+      <dt role="heading" aria-level="3">
+        <button aria-expanded="false"
+          class="c-accordion__trigger p-sidebar-menu__button"
+          aria-controls="sect-sidebar-1"
+          id="accordion-sidebar-1"
+          type="button">
+          <span class="c-accordion__heading">
+            Menu 1
+          </span>
+          <span class="c-arrow">
+            <i class="c-arrow__left"></i>
+            <i class="c-arrow__right"></i>
+          </span>
+        </button>
+      </dt>
+      <dd id="sect-sidebar-1" role="region" aria-labelledby="accordion-sidebar-1" class="c-accordion__panel p-sidebar-menu__panel">
+        <div>
+          <ul class="p-sidebar-menu__list">
+            <li class="p-sidebar-menu__item">
+              <span class="c-arrow">
+                <i class="c-arrow__left"></i>
+                <i class="c-arrow__right"></i>
+              </span>
+              <a class="p-sidebar-menu__link" href="#">Submenu 1</a>
+            </li>
+            <li class="p-sidebar-menu__item">
+              <span class="c-arrow">
+                <i class="c-arrow__left"></i>
+                <i class="c-arrow__right"></i>
+              </span>
+              <a class="p-sidebar-menu__link" href="#">Submenu 1</a>
+            </li>
+            <li class="p-sidebar-menu__item">
+              <span class="c-arrow">
+                <i class="c-arrow__left"></i>
+                <i class="c-arrow__right"></i>
+              </span>
+              <a class="p-sidebar-menu__link" href="#">Submenu 1</a>
+            </li>
+          </ul>
+        </div>
+      </dd>
+
+      <dt role="heading" aria-level="3">
+        <button aria-expanded="false"
+          class="c-accordion__trigger p-sidebar-menu__button"
+          aria-controls="sect-sidebar-2"
+          id="accordion-sidebar-2"
+          type="button">
+          <span class="c-accordion__heading">
+            Menu 2
+          </span>
+          <span class="c-arrow">
+            <i class="c-arrow__left"></i>
+            <i class="c-arrow__right"></i>
+          </span>
+        </button>
+      </dt>
+      <dd id="sect-sidebar-2" role="region" aria-labelledby="accordion-sidebar-2" class="c-accordion__panel p-sidebar-menu__panel">
+        <div>
+          <ul class="p-sidebar-menu__list">
+            <li class="p-sidebar-menu__item">
+              <span class="c-arrow">
+                <i class="c-arrow__left"></i>
+                <i class="c-arrow__right"></i>
+              </span>
+              <a class="p-sidebar-menu__link" href="#">Submenu 2</a>
+            </li>
+            <li class="p-sidebar-menu__item">
+              <span class="c-arrow">
+                <i class="c-arrow__left"></i>
+                <i class="c-arrow__right"></i>
+              </span>
+              <a class="p-sidebar-menu__link" href="#">Submenu 2</a>
+            </li>
+          </ul>
+        </div>
+      </dd>
+
+      <dt role="heading" aria-level="3">
+        <button aria-expanded="true"
+          class="c-accordion__trigger p-sidebar-menu__button"
+          aria-controls="sect-sidebar-3"
+          id="accordion-sidebar-3"
+          type="button">
+          <span class="c-accordion__heading">
+            Menu 3
+          </span>
+          <span class="c-arrow">
+            <i class="c-arrow__left"></i>
+            <i class="c-arrow__right"></i>
+          </span>
+        </button>
+      </dt>
+      <dd id="sect-sidebar-3" role="region" aria-labelledby="accordion-sidebar-3" class="c-accordion__panel p-sidebar-menu__panel">
+        <div>
+          <ul class="p-sidebar-menu__list">
+            <li class="p-sidebar-menu__item">
+              <span class="c-arrow">
+                <i class="c-arrow__left"></i>
+                <i class="c-arrow__right"></i>
+              </span>
+              <a class="p-sidebar-menu__link" href="#">Submenu 3</a>
+            </li>
+            <li class="p-sidebar-menu__item">
+              <span class="c-arrow">
+                <i class="c-arrow__left"></i>
+                <i class="c-arrow__right"></i>
+              </span>
+              <a class="p-sidebar-menu__link" href="#">Submenu 3</a>
+            </li>
+            <li class="p-sidebar-menu__item">
+              <span class="c-arrow">
+                <i class="c-arrow__left"></i>
+                <i class="c-arrow__right"></i>
+              </span>
+              <a class="p-sidebar-menu__link" href="#">Submenu 3</a>
+            </li>
+          </ul>
+        </div>
+      </dd>
+    </dl>
+  </div>
+  <div class="o-grid__item o-grid__footer">
+    <a href="#" role="button" class="c-btn c-btn--large c-btn--blue">Contact</a>
+    <dl id="accordion-group-footer" role="presentation" class="c-accordion c-accordion--disable">
+      <dt role="heading" aria-level="3">
+        <button aria-expanded="true"
+          class="c-accordion__trigger"
+          aria-controls="sect-footer-1"
+          id="accordion-footer-1"
+          type="button">
+          <span class="c-accordion__heading">
+            Connect with me
+          </span>
+          
+          
+          
+          
+          
+          
+          
+          html
+          
+          
+          
+          
+          
+          
+/*
+ ┌──────────────────────────────────────┐
+ │######################################│
+ │#┌──────────────────────────────────┐#│
+ │#│ header                           │#│
+ │#└──────────────────────────────────┘#│
+ │######################################│
+ │#┌──────────────────────┬───────────┐#│
+ │#│ ↑ summary            │ side menu │#│
+ │#├──────────────────────┼───────────┤#│
+ │#│ * details            │ side menu │#│
+ │#│ * lorem ipsonius lax ├───────────┤#│
+ │#│ tives r eto the deva │ side menu │#│
+ │#├──────────────────────┼───────────┤#│
+ │#│ ↓ summary            │ side menu │#│
+ │#├──────────────────────┤ side menu │#│
+ │#│ ↓ summary            │ side menu │#│
+ │#└──────────────────────┴───────────┘#│
+ │######################################│
+ │#┌──────────────────────────────────┐#│
+ │#│ footer                           │#│
+ │#└──────────────────────────────────┘#│
+ │######################################│
+ └──────────────────────────────────────┘
+*/
+/**
+ * Objects 
+ */
+/** main */
+.o-main
+ {
+   display: block;
+   margin: 1em;
+ }
+
+.o-main__header
+ {
+   display: block;
+ }
+.o-main__accordion
+ {
+  display: block;
+  float: left;
+  clear: left;
+ }
+.o-main__sidebar
+ {
+  display: block;
+  float: right;
+  clear: right;
+  min-width: 15em;
+ }
+.o-main__footer
+ {
+  display: block;
+ }
+/**
+ * Components
+ */
+/** Button */
+/**
+ * Patterns
+ */
+/** Icon toolbar */
+.p-icontoolbar
+{
+  list-style: none;
+}
+.p-icontoolbar__icon
+{
+  width: 44px;
+  height: 44px;
+}
+
+
+/*############### Old Example #########################*/
+
+/**
+ * Variables
+ */
+/**
+ * Functions
+ */
+/**
+ * Placeholder
+ */
+.c-accordion__trigger {
+  align-items: center;
+  background-color: transparent;
+  border: 0;
+  box-sizing: border-box;
+  color: currentColor;
+  display: flex;
+  justify-content: center;
+  margin: 0;
+  outline: unset;
+  padding: 0;
+  text-decoration: none;
+}
+.c-social-media__list,
+.p-sidebar-menu__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/**
+ * Mixins
+ */
+/**
+ * Elements
+ */
+body {
+  background: #22c1c3;
+  /* fallback for old browsers */
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #fdbb2d, #22c1c3);
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+/**
+ * Objects
+ */
+
+.o-grid {
+  display: grid;
+  grid-gap: 0.625rem;
+  grid-template-areas: "header header header" "main main sidebar" "footer footer footer";
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 20% 1fr 20%;
+}
+.o-grid__item {
+  background-color: #d2d7df;
+}
+.o-grid__header {
+  align-items: center;
+  justify-content: flex-end;
+  display: flex;
+  grid-area: header;
+  padding: 1.25rem;
+}
+.o-grid__main {
+  grid-area: main;
+  padding: 3.125rem;
+}
+.o-grid__sidebar {
+  grid-area: sidebar;
+  padding: 1.25rem;
+}
+.o-grid__footer {
+  align-items: center;
+  display: flex;
+  grid-area: footer;
+  justify-content: space-between;
+  padding: 1.25rem;
+}
+
+/**
+ * Components style
+ */
+/* Button */
+.c-btn {
+  background-color: transparent;
+  border: 0;
+  border-radius: 0.1875rem;
+  color: black;
+  padding: 0.3125rem 0.625rem;
+  text-decoration: none;
+}
+.c-btn--large {
+  font-size: 1.5625rem;
+}
+.c-btn--3d.c-btn--yellow {
+  box-shadow: 0px 4px #9b690d;
+}
+.c-btn--3d.c-btn--blue {
+  box-shadow: 0px 4px #0b66d5;
+}
+.c-btn--yellow {
+  background-color: #eca522;
+}
+.c-btn--blue {
+  background-color: #519bf6;
+  color: white;
+}
+
+/* Arrow */
+.c-arrow {
+  pointer-events: none;
+}
+.p-sidebar-menu__item .c-arrow {
+  margin: -0.375rem 0.625rem 0 0.1875rem;
+  left: 0;
+  right: auto;
+  -webkit-transform: rotate(90deg) scale(0.6);
+  transform: rotate(90deg) scale(0.6);
+}
+.c-arrow__left,
+.c-arrow__right {
+  background-color: var(--icon-bg-color);
+  display: block;
+  height: 2px;
+  position: absolute;
+  right: 1.25rem;
+  top: calc(50% - 1px);
+  transition: background-color 0.5s ease, -webkit-transform 0.5s ease;
+  transition: transform 0.5s ease, background-color 0.5s ease;
+  transition: transform 0.5s ease, background-color 0.5s ease,
+    -webkit-transform 0.5s ease;
+  width: 0.75rem;
+}
+.p-sidebar-menu .c-arrow__left,
+.p-sidebar-menu .c-arrow__right {
+  right: 0;
+}
+.p-sidebar-menu__item .c-arrow__left,
+.p-sidebar-menu__item .c-arrow__right {
+  left: 0;
+  right: auto;
+}
+.c-arrow__left {
+  -webkit-transform: translateX(0.1875rem) rotate(50deg);
+  transform: translateX(0.1875rem) rotate(50deg);
+}
+.c-accordion__trigger[aria-expanded="false"] .c-arrow__left {
+  -webkit-transform: translateX(-0.1875rem) rotate(50deg);
+  transform: translateX(-0.1875rem) rotate(50deg);
+}
+.c-arrow__right {
+  -webkit-transform: translateX(-0.25rem) rotate(-50deg);
+  transform: translateX(-0.25rem) rotate(-50deg);
+}
+.c-accordion__trigger[aria-expanded="false"] .c-arrow__right {
+  -webkit-transform: translateX(0.25rem) rotate(-50deg);
+  transform: translateX(0.25rem) rotate(-50deg);
+}
+
+/* Accordion */
+.c-accordion {
+  --default-heading-bg-color: transparent;
+  --default-heading-font-color: hsla(0, 0%, 0%, 1);
+  --default-heading-border-color: transparent;
+  --default-icon-bg-color: hsla(0, 0%, 50%, 1);
+  --default-panel-bg-color: transparent;
+  --default-panel-font-color: hsla(0, 0%, 0%, 1);
+  --heading-bg-color: var(--default-heading-bg-color);
+  --heading-font-color: var(--default-heading-font-color);
+  --heading-border-color: var(--default-heading-border-color);
+  --icon-bg-color: var(--default-icon-bg-color);
+  --panel-bg-color: var(--default-panel-bg-color);
+  --panel-font-color: var(--default-panel-font-color);
+  margin: 0;
+}
+.c-accordion--light {
+  --light-heading-bg-color: hsla(0, 0%, 93%, 1);
+  --light-heading-font-color: hsla(0, 0%, 0%, 1);
+  --light-heading-border-color: hsla(0, 0%, 85%, 1);
+  --light-icon-bg-color: hsla(0, 0%, 50%, 1);
+  --light-panel-bg-color: hsla(0, 0%, 100%, 1);
+  --light-panel-font-color: hsla(0, 0%, 0%, 1);
+  --heading-bg-color: var(--light-heading-bg-color);
+  --heading-font-color: var(--light-heading-font-color);
+  --heading-border-color: var(--light-heading-border-color);
+  --icon-bg-color: var(--light-icon-bg-color);
+  --panel-bg-color: var(--light-panel-bg-color);
+  --panel-font-color: var(--light-panel-font-color);
+}
+.c-accordion--dark {
+  --dark-heading-bg-color: hsla(0, 0%, 40%, 1);
+  --dark-heading-font-color: hsla(0, 0%, 100%, 1);
+  --dark-heading-border-color: hsla(0, 0%, 35%, 1);
+  --dark-icon-bg-color: hsla(0, 0%, 100%, 1);
+  --dark-panel-bg-color: hsla(0, 0%, 50%, 1);
+  --dark-panel-font-color: hsla(0, 0%, 100%, 1);
+  --heading-bg-color: var(--dark-heading-bg-color);
+  --heading-font-color: var(--dark-heading-font-color);
+  --heading-border-color: var(--dark-heading-border-color);
+  --icon-bg-color: var(--dark-icon-bg-color);
+  --panel-bg-color: var(--dark-panel-bg-color);
+  --panel-font-color: var(--dark-panel-font-color);
+}
+.c-accordion__trigger {
+  background-color: var(--heading-bg-color);
+  border-top: 1px solid var(--heading-border-color);
+  display: block;
+  padding: 1.25rem;
+  position: relative;
+  text-align: left;
+  transition: background-color 0.5s ease, border-color 0.5s ease;
+  width: 100%;
+}
+.c-accordion--disable .c-accordion__trigger {
+  cursor: default;
+}
+.c-accordion__heading {
+  color: var(--heading-font-color);
+  pointer-events: none;
+  transition: color 0.5s ease;
+}
+.c-accordion__panel {
+  background-color: var(--panel-bg-color);
+  color: var(--panel-font-color);
+  margin: 0;
+  padding: 0 1.25rem;
+  overflow: hidden;
+  transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+/* Social media */
+.c-social-media__list {
+  display: flex;
+}
+.c-social-media__item {
+  margin: 0 0.3125rem;
+}
+.c-social-media__link {
+  background-color: black;
+  border-radius: 50%;
+  color: white;
+  display: block;
+  height: 1.5rem;
+  padding: 0.625rem;
+  transition: background-color 0.6s ease, color 0.6s ease;
+  width: 1.5rem;
+}
+.c-social-media__link:hover {
+  background-color: white;
+  color: black;
+}
+.c-social-media__icon {
+  fill: currentColor;
+  height: 100%;
+  width: 100%;
+}
+
+/**
+ * Patterns
+ */
+.p-layout {
+  background-color: white;
+  margin: 3.125rem auto;
+  width: 90%;
+}
+.p-sidebar-menu__button {
+  padding-left: 0;
+  padding-right: 0;
+}
+.p-sidebar-menu__panel {
+  border-bottom: 1px solid gray;
+  padding: 0;
+}
+.p-sidebar-menu__list {
+  margin-bottom: 1.25rem;
+}
+.p-sidebar-menu__item {
+  display: flex;
+  padding: 0.625rem 0;
+  position: relative;
+}
+.p-sidebar-menu__link {
+  color: gray;
+  font-size: 0.875rem;
+}
+.p-sidebar-menu__link:hover {
+  text-decoration: none;
+}
+
+
+
+
+
+
+css
+     
