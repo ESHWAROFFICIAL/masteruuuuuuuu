@@ -1,0 +1,229 @@
+<nav id="nav">
+  <ul class="navbar">
+    <li> Reports </li>
+    <li> Products </li>
+    <li> About </li>
+  </ul>
+  <div class="navbox">
+    <div class="dropdown-container">
+      <ul>
+        <li>Finance</li>
+        <li>Consumer</li>
+        <li>Yearly</li>
+        <li class="dark"> Another Link </li>
+        <li class="dark"> And One More </li>
+      </ul>
+      <ul>
+        <li>Buy Now</li>
+        <li>Trial Period</li>
+        <li>Monthly Plan</li>
+        <li>Coming Soon</li>
+        <li>New Deals</li>
+        <li class="dark"> Another Link </li>
+        <li class="dark"> And One More </li>
+      </ul>
+      <ul>
+        <li>About Us</li>
+        <li>Our Company</li>
+        <li>Employees</li>
+        <li>Jobs</li>
+        <li>Better Jobs</li>
+        <li class="dark"> Another Link </li>
+        <li class="dark"> And One More </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+
+
+html
+
+
+
+
+$c-font: #6772e5;
+$c-font-dark: #32325d;
+$menu-item-width: 180px;
+$menu-item-count: 3;
+$ani-length: 0.4s;
+
+@keyframes Grad { 
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+
+body {
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  background-size: 150% 150%;
+  background-image: linear-gradient(
+    100deg,
+    #5532ff,
+    #0cc8ff,
+    #9afad0
+  );
+  animation: Grad 25s ease infinite;
+}
+
+#nav {
+  position: relative;
+  display: inline-block;
+  margin-left: 15%;
+  font-family: 'Open Sans';
+  perspective: 2000px;
+}
+
+.navbar {
+  padding: 0;
+  margin: 0;
+  
+  li {
+    position: relative;
+    font-size: 18px;
+    color: white;
+    display: inline-block;
+    width: #{$menu-item-width - 40};
+    text-align: center;
+    padding: 30px 20px;
+    
+    &:hover {
+      color: #fffa;
+      cursor: default;
+    }
+    
+    @for $i from 0 to $menu-item-count {
+      #nav.open[data-hover="#{$i}"] &:nth-child(#{$i + 1}) {
+        color: #fffa;
+      }
+    }
+  }
+}
+
+.navbox {
+  position: absolute;
+  top: 70px;
+  width: 280px;
+  white-space: nowrap;
+  background: white;
+  border-radius: 6px;
+  visibility: hidden;
+  opacity: 0;
+  transition:
+    all $ani-length,
+    left 0s,
+    visibility 0s linear $ani-length;
+  transform: rotateX(-25deg);
+  transform-origin: -100% 0;
+  will-change: left, transform, visibility, opacity, height;
+  
+  .dropdown-container {
+    overflow: hidden;
+  }
+  
+  ul{
+    opacity: 0;
+    overflow: hidden;
+    display: inline-block;
+    width: 100%;
+    list-style: none;
+    height: 0;
+    padding: 0;
+    margin: 0;
+    position: relative;
+    top: 4px;
+    
+    #nav.open & {
+      transition: all $ani-length;
+    }
+    
+    @for $i from 0 to $menu-item-count {
+      #nav[data-hover="#{$i}"] & {
+        left: #{$i * -284px};
+        
+        &:nth-child(#{$i + 1}) {
+          opacity: 1;
+          height: auto;
+        }
+      }
+    }
+  }
+
+  &:after {
+    content: '';
+    position: absolute;
+    top: -20px;
+    left: calc(50% - 10px);
+    border: 10px solid transparent;
+    border-bottom-color: white;
+  }
+
+  li {
+    color: $c-font;
+    text-align: left;
+    font-weight: bold;
+    padding: 20px 40px;
+    width: calc(100% - 80px);
+    
+    &:last-child {
+      border-radius: 0 0 6px 6px;
+    }
+    
+    &:hover {
+      color: $c-font-dark;
+      cursor: pointer;
+    }
+    
+    &.dark {
+      background: #f3f3ff;
+    }
+  }
+  
+  #nav.open & {
+    opacity: 1;
+    visibility: visible;
+    transform: rotateX(0);
+    transition:
+      all $ani-length,
+      visibility 0s;
+  }
+  
+  @for $i from 0 to $menu-item-count {
+    #nav[data-hover="#{$i}"] & {
+      left: #{($menu-item-width * $i) + ($menu-item-width / 2) - 140};
+    }
+  } 
+}
+
+
+
+
+
+
+scss
+
+
+
+
+
+let nav = document.getElementById('nav');
+
+nav.onmouseover = () => {
+  setTimeout(() => nav.classList.add('open'));
+};
+nav.onmouseleave = () => nav.classList.remove('open');
+
+Array.from(
+  nav.children[0].children
+).forEach((li, i) => {
+  li.onmouseover = () => nav.setAttribute('data-hover', i);
+});
+
+
+
+
+
+js
